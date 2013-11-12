@@ -31,7 +31,9 @@ Copyright (c) Nicolas Gallagher and Jonathan Neal
   background: rgb(66, 184, 221); /* this is a light blue */
 }
 
-
+.pure-form {
+  padding-bottom:10px;
+}
 
 
 
