@@ -9,7 +9,7 @@ This combines:
 
 
 ### Video call
-The WebRTC video call and data connection are built on top of [peerjs.com](http://peerjs.com). There is a temporary API key in the code, but you should [register for your own](http://peerjs.com/peerserver) and replace it in this line.
+The WebRTC video call and data connection are built on top of [peerjs.com](http://peerjs.com). There is a temporary API key in the code, but you should [register for your own](http://peerjs.com/peerserver) and replace it in this line in chat.js.
 
 ```javascript
 var peer = new Peer({ key: 'lwjd5qra8257b9', debug: 3, config: {'iceServers': [
