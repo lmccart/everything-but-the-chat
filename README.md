@@ -8,9 +8,18 @@ This combines:
 + [peerjs.com](http://peerjs.com) - wrapper for WebRTC p2p data and video calls
 
 
+### Video call
+The WebRTC video call and data connection are built on top of [peerjs.com](http://peerjs.com). There is a temporary API key in the code, but you should [register for your own](http://peerjs.com/peerserver) and replace it in this line.
+
+```javascript
+var peer = new Peer({ key: 'lwjd5qra8257b9', debug: 3, config: {'iceServers': [
+  { url: 'stun:stun.l.google.com:19302' } // Pass in optional STUN and TURN server for maximum network compatibility
+]}});
+``` 
+
 #### Send data
 
-The WebRTC video call and data connection is built on top of [peerjs.com](http://peerjs.com). The data connection is opened automatically when you start a video call. You can send data with ```connection.send("some-string")```, this block in chat.js demonstrates doing this on button click.
+The data connection is opened automatically when you start a video call. You can send data with ```connection.send("some-string")```, this block in chat.js demonstrates doing this on button click.
 
 ```javascript
 // Send message over data connection
