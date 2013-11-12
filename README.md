@@ -8,7 +8,7 @@ This combines:
 + [peerjs.com](http://peerjs.com) - wrapper for WebRTC p2p data and video calls
 
 
-### Video call
+#### Video call
 The WebRTC video call and data connection are built on top of [peerjs.com](http://peerjs.com). There is a temporary API key in the code, but you should [register for your own](http://peerjs.com/peerserver) and replace it in this line in chat.js.
 
 ```javascript
