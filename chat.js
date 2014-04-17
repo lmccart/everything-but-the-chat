@@ -1,3 +1,9 @@
+// LIWC stuff
+var db = new localStorageDB("db", localStorage);;
+var parser = Parser(db);
+var dbVersion = 1; // update this var if LIWC dictionaries change
+parser.initialize(dbVersion);
+
 
 // Compatibility shim
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
