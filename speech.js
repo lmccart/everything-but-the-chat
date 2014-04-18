@@ -1,3 +1,4 @@
+
 window.Speech = (function (undefined) {
 
     // https://github.com/aralejs/events ======================================
@@ -97,12 +98,21 @@ window.Speech = (function (undefined) {
 
     function Speech (options) {
 
+
+        // LIWC stuff
+        var db = new localStorageDB("db", localStorage);
+        var dbVersion = 1; // update this var if LIWC dictionaries change
+        this.parser = Parser(db);
+        this.parser.initialize(dbVersion);
+
+
         // default options
         this.options = {
             debugging: false,
             continuous: false,
             interimResults: false,
-            autoRestart: false
+            autoRestart: false,
+            liwc: false
         }
 
         // merge user options
@@ -152,15 +162,16 @@ window.Speech = (function (undefined) {
 
             if (updatedResult.isFinal) {
                 // final sentence! we can do work!
-                self.history.push(transcript)
-                self.emit('finalResult', transcript)
+                self.history.push(transcript);
+                self.emit('finalResult', transcript);
+                if (self.options.liwc) self.parser.parseLine(transcript);
             } else {
                 // interim, let's update stuff on screen
-                self.emit('interimResult', transcript)
+                self.emit('interimResult', transcript);
             }
             
             if (self.options.debugging) {
-                console.log(transcript + (updatedResult.isFinal ? ' (final)' : ''))
+                console.log(transcript + (updatedResult.isFinal ? ' (final)' : ''));
             }
         }
 

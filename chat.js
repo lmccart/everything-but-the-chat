@@ -1,8 +1,3 @@
-// LIWC stuff
-var db = new localStorageDB("db", localStorage);;
-var parser = Parser(db);
-var dbVersion = 1; // update this var if LIWC dictionaries change
-parser.initialize(dbVersion);
 
 
 // Compatibility shim
@@ -10,6 +5,8 @@ navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia 
 
 // Connection object;
 var connection;
+// Speech object
+var speech;
 
 
 // UI Peer helper methods
@@ -126,6 +123,14 @@ $(function(){
     console.log("starting speech");
     startSpeech();
     $('#start-speech').hide();
+    $('#start-liwc').show();
+  });
+
+  // Start liwc
+  $('#start-liwc').click(function(){
+    console.log("starting liwc");
+    if (speech) speech.options.liwc = true;
+    $('#start-liwc').hide();
   });
 
   // Start facetracking
@@ -146,7 +151,7 @@ $(function(){
 // See github.com/yyx990803/Speech.js for more.
 function startSpeech() {
 
-  var speech = new Speech({
+  speech = new Speech({
       // lang: 'cmn-Hans-CN', // Mandarin Chinese, default is English.
       // all boolean options default to false
       debugging: false, // true, - will console.log all results
@@ -174,6 +179,7 @@ function startSpeech() {
       .on('finalResult', function (msg) {
         // if (connection) connection.send(msg);
         console.log("sent: " + msg);
+        console.log(speech.parser.curStats);
       })
       .start()
 }

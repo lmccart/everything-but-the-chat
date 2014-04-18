@@ -47,12 +47,11 @@ var StatsHandler = function(db) {
 			////console.log(ind);
 		},
 
-		doStats: function() {
+		doStats: function(callback) {
 	
 			var total = db.rowCount("word_instances");
 			
 			var message = {
-				type: "stats",
 				calcs: [
 								["funct", "+funct"], //function words. for testing.
 								["posemo", "+posemo"], //use cat names if they correspond!
@@ -72,16 +71,18 @@ var StatsHandler = function(db) {
 				tempVal: 0,
 				total: db.rowCount("word_instances")
 			};
-		
-			this.calcCats(message);
+
+			this.calcCats(message, callback);
 	
 		},
 		
-		calcCats: function(msg) {
+		calcCats: function(msg, callback) {
 		
 			// if fully calculated, add message to queue
 			if (msg['calcs'].length === 0) {
-				//handleMessage(msg); //HOOK HERE
+				delete(msg.calcs);
+				delete(msg.tempVal);
+				callback(msg);
 			}
 			
 			else {
@@ -97,10 +98,9 @@ var StatsHandler = function(db) {
 				
 				////console.log(traitModifier+" "+traitName+" "+catEndIndex+" "+catName+" "+remainder);
 			
-				
+				var val;
 				if (msg[traitName]) {
-				
-					this.addVal(msg, traitModifier, traitName, msg[traitName]*msg['total'], remainder);
+					val = msg[traitName]*msg['total'];
 					
 				} else {
 			
@@ -111,12 +111,14 @@ var StatsHandler = function(db) {
 						return ($.inArray(catName, row.cats) != -1);
 					});
 					
-					this.addVal(msg, traitModifier, traitName, res.length, remainder)
+					val = res.length;
 				}
+				
+				this.addVal(msg, traitModifier, traitName, val, remainder, callback);
 			}
 		},
 		
-		addVal: function(msg, modifier, name, val, remainder) {
+		addVal: function(msg, modifier, name, val, remainder, callback) {
 			////console.log("addVal "+modifier+" "+name+" "+val+" "+remainder);
 		
 			if (modifier === '-') val *= -1;
@@ -133,7 +135,7 @@ var StatsHandler = function(db) {
 			else {
 				msg['calcs'][0][1] = remainder;
 			}				
-			this.calcCats(msg);
+			this.calcCats(msg, callback);
 			
 		}
 	};

@@ -5,6 +5,8 @@ var Parser = function(db) {
 	
 
 	return {
+
+		curStats: [],
 	
 		initialize: function(dbVersion) {
 			// making two tables for LIWC because it's faster
@@ -82,7 +84,8 @@ var Parser = function(db) {
 			}
 			
 			// calculate stats for the line
-			statsHandler.doStats();
+			var self = this;
+			statsHandler.doStats(function(data) { self.curStats = data; });
 		},
 		
 		getCats: function(w) {

@@ -4,11 +4,21 @@
   <title>PeerJS - Video chat example</title>
   <link rel="stylesheet" href="style.css">
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  <!-- peer.js webrtc framework -->
   <script type="text/javascript" src="http://cdn.peerjs.com/0.3/peer.js"></script>
+  <!-- speech to text stuff -->
   <script type="text/javascript" src="speech.js"></script>
+  <!-- LIWC stuff -->
+  <script type="text/javascript" src="liwc.js"></script>
+  <script type="text/javascript" src="localstoragedb.min.js"></script>
+  <script type="text/javascript" src="parser.js"></script>
+  <script type="text/javascript" src="statsHandler.js"></script>
+  <!-- facetracking stuff -->
   <script type="text/javascript" src="model_pca_20_svm.js"></script>
   <script type="text/javascript" src="clm.js"></script>
+  <!-- the chat -->
   <script type="text/javascript" src="chat.js"></script>
+  
 </head>
 
 <body>
@@ -68,6 +78,7 @@
 
         <div class="pure-form">
           <a href="#" class="pure-button pure-button-success" id="start-speech">Start speech</a>
+          <a href="#" class="pure-button pure-button-success" style="display:none" id="start-liwc">Start liwc</a>
           <a href="#" class="pure-button pure-button-success" id="start-tracking">Start tracking</a>
         </div>
       </div>
