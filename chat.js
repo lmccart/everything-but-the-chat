@@ -17,16 +17,14 @@ function step1 () {
     $('#my-video').prop('src', URL.createObjectURL(stream));
 
     window.localStream = stream;
-    step2();
+    
+    $('#step1, #step3').hide();
+    $('#step2').show();
   }, function(){ $('#step1-error').show(); });
 }
 
-function step2 () {
-  $('#step1, #step3').hide();
-  $('#step2').show();
-}
 
-function step3 (call) {
+function receiveCall(call) {
   // Hang up on an existing call if present
   if (window.existingCall) {
     window.existingCall.close();
@@ -60,7 +58,7 @@ peer.on('open', function(){
 peer.on('call', function(call){
   // Answer the call automatically (instead of prompting user) for demo purposes
   call.answer(window.localStream);
-  step3(call);
+  receiveCall(call);
 });
 
 // Receiving a data connection
@@ -217,7 +215,6 @@ function startTracking() {
       ctrack.draw(overlay);
     }
   }
-
 }
 
 
