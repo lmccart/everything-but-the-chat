@@ -30,6 +30,7 @@ function receiveCall(call) {
     window.existingCall.close();
   }
 
+  console.log('received');
   // Wait for stream on the call, then set peer video display
   call.on('stream', function(stream){
     $('#their-video').prop('src', URL.createObjectURL(stream));
@@ -70,7 +71,6 @@ peer.on('connection', function(conn) {
 peer.on('error', function(err){
   alert(err.message);
   // Return to step 2 if error occurs
-  step2();
 });
 
 function attachConnListeners() {
@@ -94,12 +94,11 @@ $(function(){
     var call = peer.call(id, window.localStream);
     connection = peer.connect(id);
     attachConnListeners();
-    step3(call);
+    receiveCall(call);
   });
 
   $('#end-call').click(function(){
     window.existingCall.close();
-    step2();
   });
 
   // Retry if getUserMedia fails
