@@ -211,6 +211,8 @@ function startTracking() {
     overlayCC.clearRect(0, 0, overlay.width, overlay.height);
     //psrElement.innerHTML = "score :" + ctrack.getScore().toFixed(4);
     if (ctrack.getCurrentPosition()) {
+      // var positions = ctrack.getCurrentPosition();
+      // positions[0][0], positions[0][1] --  x and y of first point https://github.com/auduno/clmtrackr
       ctrack.draw(overlay);
     }
   }
