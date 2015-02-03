@@ -110,6 +110,7 @@ $(function(){
   // Send message over data connection
   $('#send-data').click(function(){
     var msg = $('#data-msg').val();
+    $('#data-msg').val('');
     //console.log("sent ");
     connection.send(msg);
   });
@@ -175,7 +176,7 @@ function startSpeech() {
       })
       .on('finalResult', function (msg) {
         // if (connection) connection.send(msg);
-        console.log("sent: " + msg);
+        console.log("analyzed: " + msg);
         console.log(speech.parser.curStats);
       })
       .start()

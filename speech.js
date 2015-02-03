@@ -130,7 +130,7 @@ window.Speech = (function (undefined) {
         this.recognition    = new webkitSpeechRecognition()
 
         var rec = this.recognition,
-            self = this
+            self = this;
 
         rec.continuous = self.options.continuous
         rec.interimResults = self.options.interimResults
@@ -164,7 +164,9 @@ window.Speech = (function (undefined) {
                 // final sentence! we can do work!
                 self.history.push(transcript);
                 self.emit('finalResult', transcript);
-                if (self.options.liwc) self.parser.parseLine(transcript);
+                if (self.options.liwc) {
+                    self.parser.parseLine(transcript);
+                }
             } else {
                 // interim, let's update stuff on screen
                 self.emit('interimResult', transcript);

@@ -52,14 +52,14 @@ var Parser = function(db) {
 		  		if (LIWC_wild[i]['word'])
 				  	db.insertOrUpdate("LIWC_words_wild", {word: LIWC_wild[i]['word']}, {word: LIWC_wild[i]['word'], wildcard: true, cats: LIWC_wild[i]['cat']});
 		  	}
-		  	//console.log("loaded wild "+LIWC_wild.length);
+		  	console.log("loaded wild "+LIWC_wild.length);
 		  	db.commit();	
 			} 
 		}, 
 	
 		parseLine: function(line) {
 		
-			////console.log(line);
+			// console.log(line);
 			var spaceRegEx = new RegExp(/\S{1,}/g);
 			//var wordRegEx = new RegExp(/[\w|@|#]{1,}/);
 			
